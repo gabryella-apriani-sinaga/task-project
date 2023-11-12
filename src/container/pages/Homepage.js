@@ -42,18 +42,24 @@ const Homepage = () => {
   };
 
   return (
-    <section className="w-2/3 mx-auto">
-      <nav className="flex justify-between py-5 px-10 bg-[#79AC78]">
+    <section className="sm:w-2/3 mx-auto">
+      <nav className="flex justify-between py-5 sm:px-10 bg-[#79AC78] px-3">
         <h3 className="text-white font-bold text-xl">Gabryella</h3>
         <div className="flex gap-4">
-          <Button onClick={handleLogout}>Logout</Button>
           <Link to="/create">
             <Button>Create Events</Button>
           </Link>
+          <Button onClick={handleLogout}>Logout</Button>
         </div>
       </nav>
 
-      <h1 className="text-center mt-5 font-bold font-mono text-2xl">
+      <div className="mt-4 text-right">
+        <Link to="/filter">
+          <Button>Filter Page</Button>
+        </Link>
+      </div>
+
+      <h1 className="text-center mt-5 font-bold font-mono text-2xl mb-5">
         Welcome To My Blog
       </h1>
 

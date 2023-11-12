@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getDatabase, ref, push, set } from "firebase/database";
 import { onValue } from "firebase/database";
+import Button from "../../components/atoms/Button";
+import IconArrow from "../../components/atoms/IconArrow";
+import { Link } from "react-router-dom/dist";
 
 const initialState = {
   title: "",
@@ -84,60 +87,71 @@ const Create = () => {
   };
 
   return (
-    <section className="flex justify-center  items-center bg-green-400 w-full sm:w-1/3 mx-auto py-20 relative rounded sm:mt-10 h-3/4">
-      <form onSubmit={handleSubmit}>
-        <div className="flex gap-24 mb-4">
-          <Label>ID</Label>
+    <>
+      <div className="bg-[#79AC78] p-5  gap-8 flex items-center ">
+        <Link to="/homepage">
+          <IconArrow />
+        </Link>
+        <h1 className="text-center text-2xl font-bold  text-white">
+          {id ? "Edit Event" : "Tambah Data"}
+        </h1>
+      </div>
 
-          <input
-            type="text"
-            className="border-2 border-gray-600 ml-3 py-1 px-4 border-none rounded"
-            ref={inputID}
-          />
-        </div>
-        <div className="flex gap-20 mb-4">
-          <Label>Title</Label>
-          <input
-            type="text"
-            className="border-2 border-gray-600 ml-3 py-1 px-4 border-none rounded"
-            ref={inputTitle}
-          />
-        </div>
-        <div className="flex gap-10 mb-4">
-          <Label>Description</Label>
-          <input
-            type="text"
-            className="border-2 border-gray-600 py-1 px-4 border-none rounded"
-            ref={inputDescription}
-          />
-        </div>
+      <section className="flex justify-center items-center bg-green-400 w-full sm:w-1/3 md:w-2/3  mx-auto py-20 relative rounded sm:mt-10 h-3/4">
+        <form onSubmit={handleSubmit}>
+          <div className="flex gap-24 mb-4">
+            <Label>ID</Label>
 
-        <div className="flex gap-12 mb-4">
-          <Label>Location</Label>
-
-          <input
-            type="text"
-            className="border-2 border-gray-600 ml-3 py-1 px-4 border-none rounded"
-            ref={inputLocation}
-          />
-        </div>
-
-        <div className="flex gap-16 mb-4">
-          <Label>Image</Label>
-
-          <input
-            type="text"
-            className="border-2 border-gray-600 ml-4 py-1 px-4 border-none rounded"
-            ref={inputImage}
-          />
-        </div>
-        <div className="flex justify-center mt-7 -ml-2">
-          <div className="flex justify-center mt-7 -ml-2">
-            <button type="submit">{id ? "Update" : "Create"}</button>
+            <input
+              type="text"
+              className="border-2 border-gray-600 ml-3 py-1 sm:px-4 border-none rounded"
+              ref={inputID}
+            />
           </div>
-        </div>
-      </form>
-    </section>
+          <div className="flex gap-20 mb-4">
+            <Label>Title</Label>
+            <input
+              type="text"
+              className="border-2 border-gray-600 ml-3 py-1 sm:px-4 border-none rounded"
+              ref={inputTitle}
+            />
+          </div>
+          <div className="flex gap-10 mb-4">
+            <Label>Description</Label>
+            <input
+              type="text"
+              className="border-2 border-gray-600 py-1 sm:px-4 border-none rounded"
+              ref={inputDescription}
+            />
+          </div>
+
+          <div className="flex gap-12 mb-4">
+            <Label>Location</Label>
+
+            <input
+              type="text"
+              className="border-2 border-gray-600 ml-3 py-1 sm:px-4 border-none rounded"
+              ref={inputLocation}
+            />
+          </div>
+
+          <div className="flex gap-16 mb-4">
+            <Label>Image</Label>
+
+            <input
+              type="text"
+              className="border-2 border-gray-600 ml-4 py-1 sm:px-4 border-none rounded"
+              ref={inputImage}
+            />
+          </div>
+          <div className="flex justify-center mt-7 -ml-2 ">
+            <div className="flex justify-center ">
+              <Button type="submit">{id ? "Update" : "Create"}</Button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </>
   );
 };
 

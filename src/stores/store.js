@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import userReducer from "./reducers/index";
 
 const rootReducer = combineReducers({
-  pokemon: userReducer,
+  events: userReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

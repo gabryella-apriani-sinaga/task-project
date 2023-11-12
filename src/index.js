@@ -5,11 +5,11 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./stores/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import Login from "./container/pages/Login/Login";
 import Register from "./container/pages/Register/Register";
 import Homepage from "./container/pages/Homepage";
 import Create from "./container/pages/Create";
+import FilterPage from "./container/pages/FilterPage";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/edit/:id",
     element: <Create />,
+  },
+  {
+    path: "/filter",
+    element: <FilterPage />,
   },
 ]);
 

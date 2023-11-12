@@ -34,7 +34,7 @@ const Register = () => {
   };
   return (
     <section
-      className={`flex justify-center  items-center bg-green-400 w-full sm:w-1/3 mx-auto py-20 relative rounded sm:mt-10 h-3/4 ${
+      className={`flex justify-center  items-center bg-green-400 w-full  sm:w-2/3 md:w-2/3 mx-auto py-20  relative rounded sm:mt-10 h-3/4 ${
         errorLogin || errorLoginInput ? "brightness-50" : ""
       }`}
     >
@@ -63,7 +63,7 @@ const Register = () => {
 
           <input
             type="text"
-            className="border-2 border-gray-600 ml-3 py-1 px-4 border-none rounded"
+            className="border-2 border-gray-600 ml-3 py-1 sm:px-4 border-none rounded"
             ref={inputEmail}
           />
         </div>
@@ -71,7 +71,7 @@ const Register = () => {
           <Label>Password</Label>
           <input
             type="password"
-            className="border-2 border-gray-600 py-1 px-4 border-none rounded"
+            className="border-2 border-gray-600 py-1 sm:px-4 border-none rounded"
             ref={inputPassword}
           />
         </div>
