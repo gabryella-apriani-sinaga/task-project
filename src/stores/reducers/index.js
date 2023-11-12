@@ -1,29 +1,42 @@
+// loginPortal Reducers
+// --------------------------------------------------------
+
 import {
-  FETCH_POKEMON_REQUEST,
-  FETCH_POKEMON_SUCCESS,
-  FETCH_POKEMON_FAILURE,
+  SET_LOADING,
+  SET_ERROR,
+  CLEAR_ERROR,
+  SET_TOKEN,
 } from "../actions/index";
 
 const initialState = {
-  loading: false,
-  pokemonData: [],
+  isLoading: false,
   error: null,
+  token: null,
 };
 
-const pokemonReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_POKEMON_REQUEST:
-      return { ...state, loading: true, error: null };
-
-    case FETCH_POKEMON_SUCCESS:
-      return { ...state, loading: false, pokemonData: action.payload };
-
-    case FETCH_POKEMON_FAILURE:
-      return { ...state, loading: false, error: action.payload };
-
+export default function userReducer(state = initialState, { payload, type }) {
+  switch (type) {
+    case SET_LOADING:
+      return {
+        ...state,
+        isLoading: payload,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: payload,
+      };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
+      };
+    case SET_TOKEN:
+      return {
+        ...state,
+        token: payload,
+      };
     default:
       return state;
   }
-};
-
-export default pokemonReducer;
+}

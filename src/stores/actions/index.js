@@ -1,33 +1,80 @@
-import { servicePokemon } from "../../utils/api/pokemonService";
+// loginPortal Actions
+// --------------------------------------------------------
 
-export const FETCH_POKEMON_REQUEST = "FETCH_POKEMON_REQUEST";
-export const FETCH_POKEMON_SUCCESS = "FETCH_POKEMON_SUCCESS";
-export const FETCH_POKEMON_FAILURE = "FETCH_POKEMON_FAILURE";
+import {
+  loginServiceUser,
+  registerServiceUser,
+} from "../../utils/api/userService";
 
-export const fetchPokemonRequest = () => ({
-  type: FETCH_POKEMON_REQUEST,
+// Define action types
+export const SET_LOADING = "register/SET_LOADING";
+export const SET_ERROR = "register/SET_ERROR";
+export const CLEAR_ERROR = "regsiter/CLEAR_ERROR";
+export const SET_TOKEN = "register/SET_TOKEN";
+
+export const setLoading = (payload) => ({
+  type: SET_LOADING,
+  payload,
 });
 
-export const fetchPokemonSuccess = (data) => ({
-  type: FETCH_POKEMON_SUCCESS,
-  payload: data,
+export const setError = (payload) => ({
+  type: SET_ERROR,
+  payload,
 });
 
-export const fetchPokemonFailure = (error) => ({
-  type: FETCH_POKEMON_FAILURE,
-  payload: error,
+export const clearError = () => ({
+  type: CLEAR_ERROR,
 });
 
-export const fetchPokemon = () => {
-  return async (dispatch) => {
-    dispatch(fetchPokemonRequest());
+export const setToken = (payload) => ({
+  type: SET_TOKEN,
+  payload,
+});
 
+export const register =
+  (email, password, handlingError, navigate) => async (dispatch) => {
     try {
-      const response = await servicePokemon(); //
-      const pokemonList = response.data.results;
-      dispatch(fetchPokemonSuccess(pokemonList));
+      dispatch(setLoading(true));
+      dispatch(clearError());
+      const response = await registerServiceUser({ email, password });
+      console.log(response);
+      const { status, data } = response;
+      if (status === 200) {
+        const { token } = data;
+        localStorage.setItem("email", email);
+        localStorage.setItem("dataUser", JSON.stringify(data));
+        navigate("/homepage");
+        dispatch(setToken(token));
+      }
     } catch (error) {
-      dispatch(fetchPokemonFailure(error.message));
+      console.error("ERR ", handlingError(error));
+    } finally {
+      dispatch(setLoading(false));
     }
   };
+
+export const login =
+  (email, password, handlingError, navigate) => async (dispatch) => {
+    try {
+      dispatch(setLoading(true));
+      dispatch(clearError());
+      const response = await loginServiceUser({ email, password });
+      console.log(response);
+      const { status, data } = response;
+      if (status === 200) {
+        const { token } = data;
+        localStorage.setItem("dataUser", JSON.stringify(data));
+        dispatch(setToken(token));
+        navigate("homepage");
+        console.log("CobaCoba");
+      }
+    } catch (error) {
+      console.error("ERR ", handlingError(error));
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+export const logout = () => {
+  localStorage.removeItem("dataUser");
 };

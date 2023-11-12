@@ -1,1 +1,1 @@
-export * from "./pokemonService";
+export * from "./userService";

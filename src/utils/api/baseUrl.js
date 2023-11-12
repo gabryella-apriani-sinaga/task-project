@@ -1,5 +1,5 @@
-const devApiUrl = "https://pokeapi.co/api/v2";
+const devApiUrl = " https://reqres.in/api";
 
-const apiUrl = process.env.REACT_APP_API || devApiUrl;
+const apiUrl = devApiUrl;
 
 export default apiUrl;
